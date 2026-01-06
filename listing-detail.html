@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | LandFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (same as index.html) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-green-700">
+                <i class="fas fa-mountain mr-2"></i>LandFlow
+            </a>
+            <div class="space-x-6 hidden md:flex">
+                <a href="listings.html" class="text-gray-700 hover:text-green-700">Browse Land</a>
+                <a href="submit-listing.html" class="text-gray-700 hover:text-green-700">Sell Land</a>
+                <a href="about.html" class="text-gray-700 hover:text-green-700">How It Works</a>
+                <a href="contact.html" class="text-gray-700 hover:text-green-700">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dynamic content will go here -->
+    <section class="container mx-auto px-4 py-12">
+        <div id="listingDetail">
+            <!-- JavaScript from main.js will populate this -->
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-green-400 mb-2">LandFlow</h3>
+                    <p class="text-gray-400">Digital Land Marketplace</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-400">&copy; 2023 LandFlow MVP. All rights reserved.</p>
+                    <p class="text-gray-500 text-sm mt-2">This is a demonstration MVP.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="contact.html" class="inline-block border border-green-400 text-green-400 hover:bg-green-400 hover:text-white py-2 px-6 rounded-lg transition">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

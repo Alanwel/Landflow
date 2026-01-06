@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Land | LandFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (same as index.html) -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-green-700">
+                <i class="fas fa-mountain mr-2"></i>LandFlow
+            </a>
+            <div class="space-x-6 hidden md:flex">
+                <a href="listings.html" class="text-gray-700 hover:text-green-700">Browse Land</a>
+                <a href="submit-listing.html" class="text-gray-700 hover:text-green-700">Sell Land</a>
+                <a href="about.html" class="text-gray-700 hover:text-green-700">How It Works</a>
+                <a href="contact.html" class="text-gray-700 hover:text-green-700">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Submit Listing Form -->
+    <section class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">List Your Land</h1>
+            <p class="text-gray-600 mb-8">Fill out this form to submit your property. We'll verify the details and contact you within 24 hours.</p>
+            
+            <form id="listingForm" class="space-y-8">
+                <!-- Property Details -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-info-circle mr-2 text-green-600"></i>Property Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Property Title*</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="e.g., 10 Acre Farmland in Kansas">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Asking Price*</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="e.g., $75,000">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Acres*</label>
+                            <input type="number" step="0.1" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="e.g., 10.5">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Property Type*</label>
+                            <select required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select Type</option>
+                                <option>Agricultural</option>
+                                <option>Residential</option>
+                                <option>Commercial</option>
+                                <option>Recreational</option>
+                                <option>Ranch</option>
+                                <option>Wooded</option>
+                                <option>Lakefront</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 mb-2">Full Address / Location*</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="County, State, Nearest Town">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 mb-2">Description*</label>
+                            <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Describe the land, features, terrain, access, etc."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features & Amenities -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-check-circle mr-2 text-green-600"></i>Features & Amenities</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Water Access</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Electricity Available</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Road Access</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Fenced</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Wooded</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Cleared</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Mineral Rights Included</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Water Rights</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                            <span>Hunting Allowed</span>
+                        </label>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-gray-700 mb-2">Other Features (comma separated)</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="e.g., Pond, Mountain Views, Near Town">
+                    </div>
+                </div>
+
+                <!-- Media & Documents -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-images mr-2 text-green-600"></i>Media & Documents</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Main Property Image URL*</label>
+                            <input type="url" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="https://example.com/land-photo.jpg">
+                            <p class="text-sm text-gray-500 mt-1">Upload to Imgur or similar and paste link here</p>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Additional Image URLs (one per line)</label>
+                            <textarea rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="https://..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Document Status</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                                    <span>Title Available</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                                    <span>Survey Available</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 h-5 w-5 text-green-600">
+                                    <span>Zoning Documentation</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Owner Information -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-user mr-2 text-green-600"></i>Your Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Full Name*</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Email*</label>
+                            <input type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Phone*</label>
+                            <input type="tel" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Best Time to Contact</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option>Any Time</option>
+                                <option>Morning (9AM-12PM)</option>
+                                <option>Afternoon (12PM-5PM)</option>
+                                <option>Evening (5PM-8PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms & Submit -->
+                <div class="border-t pt-6">
+                    <label class="flex items-start">
+                        <input type="checkbox" required class="mr-3 h-5 w-5 mt-1 text-green-600">
+                        <span class="text-gray-700">I confirm that I own this property or am authorized to sell it. I agree to LandFlow's <a href="#" class="text-green-600 hover:underline">Terms of Service</a>.</span>
+                    </label>
+                    
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition flex-1">
+                            <i class="fas fa-paper-plane mr-2"></i>Submit Listing
+                        </button>
+                        <button type="button" id="saveDraft" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg text-lg transition flex-1">
+                            <i class="fas fa-save mr-2"></i>Save as Draft
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-green-400 mb-2">LandFlow</h3>
+                    <p class="text-gray-400">Digital Land Marketplace</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-400">&copy; 2023 LandFlow MVP. All rights reserved.</p>
+                    <p class="text-gray-500 text-sm mt-2">This is a demonstration MVP.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="contact.html" class="inline-block border border-green-400 text-green-400 hover:bg-green-400 hover:text-white py-2 px-6 rounded-lg transition">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('listingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your listing has been submitted. We will verify the details and contact you within 24 hours.');
+            this.reset();
+            // In a real app, you would send this data to a backend
+        });
+        
+        document.getElementById('saveDraft').addEventListener('click', function() {
+            alert('Draft saved! (This would save locally in a real application)');
+        });
+    </script>
+</body>
+</html>

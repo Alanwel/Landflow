@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandFlow | Buy & Sell Land Online - Digital Land Marketplace</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Buy and sell land online with verified titles. Digital land marketplace for agricultural, residential, recreational, and investment properties. Secure transactions.">
+    <meta name="keywords" content="land for sale, buy land, sell land, farmland, recreational land, land marketplace, agricultural land, investment property">
+    <meta property="og:title" content="LandFlow - Digital Land Marketplace">
+    <meta property="og:description" content="Buy and sell land online with secure digital transactions and verified titles.">
+    <meta property="og:type" content="website">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+        .land-type-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-green-700 flex items-center">
+                <i class="fas fa-mountain mr-2 text-3xl"></i>
+                <span>LandFlow</span>
+            </a>
+            <div class="space-x-8 hidden md:flex">
+                <a href="index.html" class="text-green-700 font-semibold border-b-2 border-green-700 pb-1">Home</a>
+                <a href="listings.html" class="text-gray-700 hover:text-green-700 transition">Browse Land</a>
+                <a href="submit-listing.html" class="text-gray-700 hover:text-green-700 transition">Sell Land</a>
+                <a href="about.html" class="text-gray-700 hover:text-green-700 transition">How It Works</a>
+                <a href="contact.html" class="text-gray-700 hover:text-green-700 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-700 mobile-menu-btn text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="container mx-auto px-4 py-20 md:py-28">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Buy & Sell Land
+                        <span class="block text-green-200">The Digital Way</span>
+                    </h1>
+                    <p class="text-xl text-green-100 mb-8 max-w-lg">
+                        Verified titles. Secure agreements. Simple digital process. 
+                        No middlemen. Experience the future of land transactions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="listings.html" class="bg-white text-green-700 hover:bg-green-50 font-bold py-4 px-8 rounded-lg text-lg transition text-center">
+                            <i class="fas fa-search mr-2"></i>Find Land
+                        </a>
+                        <a href="submit-listing.html" class="bg-transparent border-2 border-white hover:bg-white hover:text-green-700 font-bold py-4 px-8 rounded-lg text-lg transition text-center">
+                            <i class="fas fa-plus mr-2"></i>List Property
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Find Your Perfect Property</h3>
+                            <p class="text-green-100">Search thousands of verified listings</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <input type="text" placeholder="State, County, or ZIP" class="flex-grow p-4 rounded-lg text-gray-800">
+                                <select class="p-4 rounded-lg text-gray-800">
+                                    <option>Land Type</option>
+                                    <option>Agricultural</option>
+                                    <option>Residential</option>
+                                    <option>Recreational</option>
+                                    <option>Commercial</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <select class="p-4 rounded-lg text-gray-800">
+                                    <option>Min Price</option>
+                                    <option>$10,000</option>
+                                    <option>$50,000</option>
+                                    <option>$100,000</option>
+                                    <option>$250,000+</option>
+                                </select>
+                                <select class="p-4 rounded-lg text-gray-800">
+                                    <option>Max Price</option>
+                                    <option>$100,000</option>
+                                    <option>$250,000</option>
+                                    <option>$500,000</option>
+                                    <option>$1M+</option>
+                                </select>
+                            </div>
+                            <button class="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-4 px-6 rounded-lg text-lg transition">
+                                <i class="fas fa-search mr-2"></i>Search Properties
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stat-card p-6 rounded-xl bg-green-50">
+                    <div class="text-4xl font-bold text-green-700 mb-2 stat-number">500</div>
+                    <div class="text-gray-600 font-medium">Properties Listed</div>
+                </div>
+                <div class="stat-card p-6 rounded-xl bg-blue-50">
+                    <div class="text-4xl font-bold text-blue-700 mb-2 stat-number">50</div>
+                    <div class="text-gray-600 font-medium">Million+ Sold</div>
+                </div>
+                <div class="stat-card p-6 rounded-xl bg-yellow-50">
+                    <div class="text-4xl font-bold text-yellow-700 mb-2 stat-number">24</div>
+                    <div class="text-gray-600 font-medium">Avg. Response Time</div>
+                </div>
+                <div class="stat-card p-6 rounded-xl bg-purple-50">
+                    <div class="text-4xl font-bold text-purple-700 mb-2 stat-number">100</div>
+                    <div class="text-gray-600 font-medium">Verified Titles</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Featured Properties</h2>
+                    <p class="text-gray-600">Hand-picked listings with verified titles</p>
+                </div>
+                <a href="listings.html" class="text-green-700 hover:text-green-800 font-semibold">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div id="featuredListings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JavaScript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Land Types Showcase -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Find Your Perfect Land</h2>
+            <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Browse by category to find land that matches your vision</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <a href="listings.html?type=agricultural" class="land-type-card bg-green-50 hover:bg-green-100 p-8 rounded-xl text-center transition-all duration-300 border-2 border-transparent hover:border-green-300">
+                    <div class="text-green-600 text-5xl mb-6">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-3 text-xl">Agricultural</h3>
+                    <p class="text-gray-600 mb-4">Farmland, crops, livestock operations</p>
+                    <span class="text-green-700 font-semibold text-sm">View Properties →</span>
+                </a>
+                
+                <a href="listings.html?type=residential" class="land-type-card bg-blue-50 hover:bg-blue-100 p-8 rounded-xl text-center transition-all duration-300 border-2 border-transparent hover:border-blue-300">
+                    <div class="text-blue-600 text-5xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-3 text-xl">Residential</h3>
+                    <p class="text-gray-600 mb-4">Building lots, homesteads, family land</p>
+                    <span class="text-blue-700 font-semibold text-sm">View Properties →</span>
+                </a>
+                
+                <a href="listings.html?type=recreational" class="land-type-card bg-yellow-50 hover:bg-yellow-100 p-8 rounded-xl text-center transition-all duration-300 border-2 border-transparent hover:border-yellow-300">
+                    <div class="text-yellow-600 text-5xl mb-6">
+                        <i class="fas fa-campground"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-3 text-xl">Recreational</h3>
+                    <p class="text-gray-600 mb-4">Hunting, fishing, camping, outdoor</p>
+                    <span class="text-yellow-700 font-semibold text-sm">View Properties →</span>
+                </a>
+                
+                <a href="listings.html?type=investment" class="land-type-card bg-purple-50 hover:bg-purple-100 p-8 rounded-xl text-center transition-all duration-300 border-2 border-transparent hover:border-purple-300">
+                    <div class="text-purple-600 text-5xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-3 text-xl">Investment</h3>
+                    <p class="text-gray-600 mb-4">Timber, development, long-term</p>
+                    <span class="text-purple-700 font-semibold text-sm">View Properties →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">How LandFlow Works</h2>
+            <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Simple, secure, and transparent process from start to finish</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 text-green-700 rounded-full text-2xl font-bold mb-6">
+                        1
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">List or Discover</h3>
+                    <p class="text-gray-700">Sellers submit verified listings. Buyers browse with detailed filters and complete information.</p>
+                </div>
+                
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 text-green-700 rounded-full text-2xl font-bold mb-6">
+                        2
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Connect & Verify</h3>
+                    <p class="text-gray-700">Direct communication between parties. Optional title verification and due diligence services.</p>
+                </div>
+                
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 text-green-700 rounded-full text-2xl font-bold mb-6">
+                        3
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Secure Transaction</h3>
+                    <p class="text-gray-700">Digital contracts, e-signatures, and optional escrow services for safe, remote closing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Trusted by Land Owners</h2>
+            <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">See what our clients say about their experience</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-yellow-400 mb-6 text-xl">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-8 text-lg italic">"Sold my 50-acre farm in 2 weeks! The digital process saved me months of paperwork and agent fees. Title verification gave buyers confidence."</p>
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mr-4 flex items-center justify-center text-white font-bold text-xl">
+                            JW
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-800 text-lg">James Wilson</div>
+                            <div class="text-gray-600">Sold Agricultural Land in Kansas</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-yellow-400 mb-6 text-xl">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-8 text-lg italic">"Found my dream hunting property from another state. The virtual tour and digital documents made remote purchase possible. Exceptional service!"</p>
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mr-4 flex items-center justify-center text-white font-bold text-xl">
+                            MS
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-800 text-lg">Michael Rodriguez</div>
+                            <div class="text-gray-600">Bought Recreational Land in Colorado</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-yellow-400 mb-6 text-xl">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-8 text-lg italic">"As a first-time land buyer, I was nervous. LandFlow's verification process and transparent documentation made me feel secure. Highly recommended!"</p>
+                    <div class="flex items-center">
+                        <div class="w-14 h-14 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-4 flex items-center justify-center text-white font-bold text-xl">
+                            SR
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-800 text-lg">Sarah Johnson</div>
+                            <div class="text-gray-600">Bought Residential Plot in Texas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Frequently Asked Questions</h2>
+            <p class="text-gray-600 text-center mb-12">Get answers to common questions about buying and selling land</p>
+            
+            <div class="space-y-6">
+                <div class="bg-white p-8 rounded-xl shadow-lg faq-item">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex justify-between items-center cursor-pointer">
+                        <span>How do you verify land titles?</span>
+                        <i class="fas fa-chevron-down text-green-600 transition-transform"></i>
+                    </h3>
+                    <p class="text-gray-700 faq-answer">We work with certified title companies and access public records to verify ownership, liens, and encumbrances. Every listing undergoes a preliminary title check before going live.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg faq-item">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex justify-between items-center cursor-pointer">
+                        <span>Can I buy land from another state?</span>
+                        <i class="fas fa-chevron-down text-green-600 transition-transform"></i>
+                    </h3>
+                    <p class="text-gray-700 faq-answer hidden">Yes! That's the advantage of digital transactions. All documentation can be handled remotely. We recommend a site visit before purchase, but it's not required for the transaction.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg faq-item">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex justify-between items-center cursor-pointer">
+                        <span>What fees do you charge?</span>
+                        <i class="fas fa-chevron-down text-green-600 transition-transform"></i>
+                    </h3>
+                    <p class="text-gray-700 faq-answer hidden">Listing is free for sellers. We charge a 3% commission upon successful sale. Buyers pay no fees. Additional services like enhanced title verification or escrow have separate transparent fees.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg faq-item">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex justify-between items-center cursor-pointer">
+                        <span>How long does the process take?</span>
+                        <i class="fas fa-chevron-down text-green-600 transition-transform"></i>
+                    </h3>
+                    <p class="text-gray-700 faq-answer hidden">From initial contact to closing typically takes 30-45 days, depending on due diligence and financing. Cash transactions can close in as little as 2 weeks with our expedited process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-gradient-to-r from-green-900 to-green-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to Start Your Land Journey?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto text-green-100">Join thousands of satisfied buyers and sellers who trust LandFlow for secure, transparent land transactions.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="listings.html" class="bg-white text-green-700 hover:bg-green-50 font-bold py-5 px-10 rounded-lg text-xl transition shadow-lg hover:shadow-xl">
+                    <i class="fas fa-search mr-3"></i>Browse Properties
+                </a>
+                <a href="submit-listing.html" class="bg-transparent border-3 border-white hover:bg-white hover:text-green-700 font-bold py-5 px-10 rounded-lg text-xl transition shadow-lg hover:shadow-xl">
+                    <i class="fas fa-plus mr-3"></i>List Your Land
+                </a>
+            </div>
+            
+            <p class="mt-10 text-green-200">
+                <i class="fas fa-shield-alt mr-2"></i>
+                All transactions protected with 256-bit encryption
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-green-400 mb-4 flex items-center">
+                        <i class="fas fa-mountain mr-2"></i>LandFlow
+                    </h3>
+                    <p class="text-gray-400 mb-6">Digital Land Marketplace connecting buyers and sellers with verified titles and secure transactions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-x"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="listings.html" class="text-gray-400 hover:text-white transition">Browse Land</a></li>
+                        <li><a href="submit-listing.html" class="text-gray-400 hover:text-white transition">Sell Land</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Land Types</h4>
+                    <ul class="space-y-3">
+                        <li><a href="listings.html?type=agricultural" class="text-gray-400 hover:text-white transition">Agricultural Land</a></li>
+                        <li><a href="listings.html?type=residential" class="text-gray-400 hover:text-white transition">Residential Land</a></li>
+                        <li><a href="listings.html?type=recreational" class="text-gray-400 hover:text-white transition">Recreational Land</a></li>
+                        <li><a href="listings.html?type=investment" class="text-gray-400 hover:text-white transition">Investment Property</a></li>
+                        <li><a href="listings.html" class="text-gray-400 hover:text-white transition">All Properties</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-green-400 mr-3 mt-1"></i>
+                            <span class="text-gray-400">support@landflow.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-green-400 mr-3 mt-1"></i>
+                            <span class="text-gray-400">+256755432091</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mr-3 mt-1"></i>
+                            <span class="text-gray-400">Mukono <br>Suite 400<br>Nabuti, TX 78701</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-500">
+                    &copy; 2026 LandFlow MVP. All rights reserved. 
+                    <span class="block sm:inline mt-2 sm:mt-0">This is a demonstration website for educational purposes.</span>
+                </p>
+                <div class="mt-4 text-gray-600 text-sm">
+                    <a href="#" class="hover:text-gray-400 mx-3">Privacy Policy</a> | 
+                    <a href="#" class="hover:text-gray-400 mx-3">Terms of Service</a> | 
+                    <a href="#" class="hover:text-gray-400 mx-3">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Enhanced main.js functions for homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animated stats counter
+            function animateStats() {
+                const stats = document.querySelectorAll('.stat-number');
+                stats.forEach(stat => {
+                    const target = parseInt(stat.textContent);
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + '+';
+                        }
+                    }, 40);
+                });
+            }
+            
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('h3');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('i');
+                
+                question.addEventListener('click', () => {
+                    // Toggle current answer
+                    answer.classList.toggle('hidden');
+                    
+                    // Close other answers
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-answer').classList.add('hidden');
+                            otherItem.querySelector('i').classList.remove('fa-chevron-up');
+                            otherItem.querySelector('i').classList.add('fa-chevron-down');
+                        }
+                    });
+                    
+                    // Toggle icon
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const mobileMenu = document.createElement('div');
+                    mobileMenu.className = 'fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-8';
+                    mobileMenu.innerHTML = `
+                        <button class="absolute top-6 right-6 text-3xl text-gray-700 close-menu">&times;</button>
+                        <div class="space-y-8 text-center w-full">
+                            <a href="index.html" class="block text-3xl font-bold text-green-700 py-4 border-b">Home</a>
+                            <a href="listings.html" class="block text-3xl text-gray-700 hover:text-green-700 py-4 border-b transition">Browse Land</a>
+                            <a href="submit-listing.html" class="block text-3xl text-gray-700 hover:text-green-700 py-4 border-b transition">Sell Land</a>
+                            <a href="about.html" class="block text-3xl text-gray-700 hover:text-green-700 py-4 border-b transition">How It Works</a>
+                            <a href="contact.html" class="block text-3xl text-gray-700 hover:text-green-700 py-4 transition">Contact</a>
+                        </div>
+                    `;
+                    document.body.appendChild(mobileMenu);
+                    
+                    // Close button
+                    mobileMenu.querySelector('.close-menu').addEventListener('click', function() {
+                        mobileMenu.remove();
+                    });
+                    
+                    // Close when clicking links
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', function() {
+                            mobileMenu.remove();
+                        });
+                    });
+                    
+                    // Close when clicking outside
+                    mobileMenu.addEventListener('click', function(e) {
+                        if (e.target === mobileMenu) {
+                            mobileMenu.remove();
+                        }
+                    });
+                });
+            }
+            
+            // Initialize animations
+            setTimeout(animateStats, 500);
+            
+            // Featured listings (from existing main.js)
+            if (document.getElementById('featuredListings')) {
+                const featuredContainer = document.getElementById('featuredListings');
+                const featuredListings = listings.filter(l => l.featured).slice(0, 3);
+                
+                featuredListings.forEach(listing => {
+                    const card = `
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 h-full flex flex-col">
+                            <div class="relative">
+                                <div class="absolute top-4 left-4 z-10">
+                                    <span class="bg-green-600 text-white text-sm font-bold px-4 py-2 rounded-full">
+                                        ${listing.zoning}
+                                    </span>
+                                </div>
+                                <div class="h-64 overflow-hidden">
+                                    <img src="${listing.image}" alt="${listing.title}" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                                </div>
+                            </div>
+                            
+                            <div class="p-8 flex-grow flex flex-col">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3">${listing.title}</h3>
+                                <p class="text-gray-600 mb-6 flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-3 text-green-600"></i>
+                                    ${listing.location}
+                                </p>
+                                
+                                <div class="mb-8 flex-grow">
+                                    <div class="flex flex-wrap gap-2 mb-6">
+                                        ${listing.features.slice(0, 3).map(feature => 
+                                            `<span class="bg-gray-100 text-gray-800 text-sm px-4 py-2 rounded-full">${feature}</span>`
+                                        ).join('')}
+                                    </div>
+                                    <p class="text-gray-700">${listing.description.substring(0, 140)}...</p>
+                                </div>
+                                
+                                <div class="border-t pt-6 mt-auto">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <p class="text-3xl font-bold text-green-700">${listing.price}</p>
+                                            <p class="text-gray-600"><i class="fas fa-ruler-combined mr-2"></i>${listing.acres} Acres</p>
+                                        </div>
+                                        <a href="listing-detail.html?id=${listing.id}" 
+                                           class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                                            View Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    featuredContainer.innerHTML += card;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
