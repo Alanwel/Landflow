@@ -5,7 +5,26 @@ import { useEffect, useState } from "react";
 
 type LinkItem = { href: string; label: string };
 
-export default function MobileNav({ links }: { links: LinkItem[] }) {
+type Props = {
+  links: LinkItem[];
+  /** Who is signed in, decided on the server. */
+  signedIn: boolean;
+  isAdmin: boolean;
+  isOperator: boolean;
+};
+
+/**
+ * The mobile drawer.
+ *
+ * It used to render a hardcoded "Sign in" link, because it had no idea who
+ * was signed in — it is a client component and the session lives in a
+ * cookie. So a signed-in operator still saw "Sign in" on their phone, and
+ * could not sign out from the menu at all.
+ *
+ * The session state now comes in as props from the server component that
+ * already reads it, so the menu tells the truth.
+ */
+export default function MobileNav({ links, signedIn, isAdmin, isOperator }: Props) {
   const [open, setOpen] = useState(false);
 
   // Lock the page behind the drawer so the background does not scroll.
@@ -85,13 +104,51 @@ export default function MobileNav({ links }: { links: LinkItem[] }) {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base font-medium text-ink-900 hover:bg-sand-100"
-              >
-                Sign in
-              </Link>
+              {signedIn ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-3 py-3 text-base font-medium text-ink-900 hover:bg-sand-100"
+                  >
+                    Dashboard
+                  </Link>
+                  {isAdmin ? (
+                    <Link
+                      href="/admin"
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-3 py-3 text-base font-medium text-ink-900 hover:bg-sand-100"
+                    >
+                      Admin
+                    </Link>
+                  ) : isOperator ? (
+                    <Link
+                      href="/admin"
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-3 py-3 text-base font-medium text-ink-900 hover:bg-sand-100"
+                    >
+                      Operator
+                    </Link>
+                  ) : null}
+                  <form action="/api/auth/signout" method="post">
+                    <button
+                      type="submit"
+                      onClick={() => setOpen(false)}
+                      className="w-full rounded-lg px-3 py-3 text-left text-base font-medium text-ink-900 hover:bg-sand-100"
+                    >
+                      Sign out
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-ink-900 hover:bg-sand-100"
+                >
+                  Sign in
+                </Link>
+              )}
               <Link
                 href="/list-your-land"
                 onClick={() => setOpen(false)}
