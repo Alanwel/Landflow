@@ -1,0 +1,40 @@
+name: RLS policy tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rls:
+    name: pgTAP RLS policies
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client + pgtap
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client postgresql-15-pgtap
+
+      - name: Run the RLS policy suite
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql "host=localhost port=5432 user=postgres dbname=postgres" \
+            -v ON_ERROR_STOP=0 -f supabase/rls-tests.sql
