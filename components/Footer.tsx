@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { connection } from "next/server";
 
 import FooterYear from "@/components/FooterYear";
+import { createClient } from "@/lib/supabase/server";
 
 const COLUMNS = [
   {
@@ -24,7 +27,6 @@ const COLUMNS = [
   {
     heading: "Account",
     links: [
-      { href: "/login", label: "Sign in" },
       { href: "/saved", label: "Saved land" },
       { href: "/dashboard", label: "Enquiries" },
     ],
@@ -56,6 +58,11 @@ export default function Footer() {
               {column.heading}
             </h2>
             <ul className="mt-4 space-y-2.5">
+              {column.heading === "Account" && (
+                <Suspense fallback={null}>
+                  <AccountLinks />
+                </Suspense>
+              )}
               {column.links.map((link) => (
                 <li key={link.href + link.label}>
                   <Link
@@ -83,5 +90,58 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+
+/**
+ * The Account column's session-dependent links.
+ *
+ * "Sign in" used to be a hardcoded constant, so a signed-in operator still
+ * saw "Sign in" in the footer of every page. It reads the session on the
+ * server, inside a Suspense hole, so the rest of the footer stays static.
+ */
+async function AccountLinks() {
+  await connection();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return (
+      <li>
+        <Link
+          href="/login"
+          className="text-sm text-ink-500 transition-colors hover:text-brand-700"
+        >
+          Sign in
+        </Link>
+      </li>
+    );
+  }
+
+  return (
+    <>
+      <li>
+        <Link
+          href="/dashboard"
+          className="text-sm text-ink-500 transition-colors hover:text-brand-700"
+        >
+          Your account
+        </Link>
+      </li>
+      <li>
+        <form action="/api/auth/signout" method="post">
+          <button
+            type="submit"
+            className="text-sm text-ink-500 transition-colors hover:text-brand-700"
+          >
+            Sign out
+          </button>
+        </form>
+      </li>
+    </>
   );
 }

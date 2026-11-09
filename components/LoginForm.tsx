@@ -14,6 +14,7 @@ export default function LoginForm({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -37,13 +38,10 @@ export default function LoginForm({
         { p_email: email },
       );
 
-      if (checkError) {
-        setError(
-          "We could not check that email address. Please try again in a moment.",
-        );
-        setBusy(false);
-        return;
-      }
+      // A failure here must NOT block the sign-up: the same check runs on
+      // the server inside create_account(), and that is the one that counts.
+      // Blocking on a flaky client-side call would lock people out of a
+      // working sign-up form.
 
       if (blocked) {
         setError(
@@ -53,12 +51,56 @@ export default function LoginForm({
         return;
       }
 
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) setError(error.message);
-      else
-        setMessage(
-          "Account created. If your email is confirmed you can sign in now.",
+      // Creating the account goes through a DATABASE FUNCTION, not
+      // supabase.auth.signUp().
+      //
+      // signUp() sends a confirmation email, and Supabase's built-in mailer
+      // allows only a couple of messages an hour and silently drops the
+      // rest — so the link never arrived and nobody could finish signing
+      // up. create_account() creates the account with the address already
+      // confirmed, so there is no email to wait for.
+      //
+      // It also does the checks the browser used to do, on the server: a
+      // banned address is refused, and an address that already has an
+      // account is refused. Those checks were client-side, so anyone could
+      // have skipped them by calling the API directly.
+      const { data: userId, error: createError } = await supabase.rpc(
+        "create_account",
+        {
+          p_email: email.trim(),
+          p_password: password,
+          p_full_name: fullName.trim() || null,
+        },
+      );
+
+      if (createError) {
+        setError(createError.message);
+        setBusy(false);
+        return;
+      }
+
+      if (!userId) {
+        setError("We could not create that account. Please try again.");
+        setBusy(false);
+        return;
+      }
+
+      // The account exists and is confirmed — sign in straight away.
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (signInError) {
+        setError(
+          "Your account was created, but we could not sign you in. Please use the Sign in tab.",
         );
+        setBusy(false);
+        return;
+      }
+
+      window.location.href = next;
+      return;
     } else {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -127,6 +169,23 @@ export default function LoginForm({
         <div className="notice notice-success">
           <span>{message}</span>
         </div>
+      ) : null}
+
+      {mode === "signup" ? (
+        <label className="flex flex-col">
+          <span className="field-label">Your name</span>
+          <input
+            type="text"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            autoComplete="name"
+            className="field"
+            placeholder="e.g. Allan Mukasa"
+          />
+          <span className="field-hint">
+            Sellers see this when they read your enquiry.
+          </span>
+        </label>
       ) : null}
 
       <label className="flex flex-col">

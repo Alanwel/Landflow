@@ -47,14 +47,14 @@ export default function Nav() {
           </div>
         </div>
 
+        {/*
+          The desktop links and the mobile drawer both depend on WHO IS
+          SIGNED IN, so they are rendered together by one server component.
+          Splitting them let the mobile drawer drift out of sync with the
+          desktop nav — it showed "Sign in" to people who were signed in.
+        */}
         <Suspense fallback={<div className="h-9 w-24" />}>
           <AuthArea />
-        </Suspense>
-
-        <Suspense fallback={<div className="h-10 w-10 md:hidden" />}>
-          <div className="md:hidden">
-            <MobileNav links={LINKS} />
-          </div>
         </Suspense>
       </nav>
     </header>
@@ -74,41 +74,48 @@ async function AuthArea() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    return (
+  const [operator, admin] = user
+    ? await Promise.all([isOperator(user.id), isAdmin(user.id)])
+    : [false, false];
+
+  return (
+    <>
+      {/* Desktop */}
       <div className="hidden items-center gap-3 md:flex">
-        <Link href="/login" className="btn btn-ghost">
-          Sign in
-        </Link>
+        {user ? (
+          <>
+            <Link href="/dashboard" className="btn btn-ghost">
+              Dashboard
+            </Link>
+            {admin ? (
+              <Link href="/admin" className="btn btn-ghost">
+                Admin
+              </Link>
+            ) : operator ? (
+              <Link href="/admin" className="btn btn-ghost">
+                Operator
+              </Link>
+            ) : null}
+          </>
+        ) : (
+          <Link href="/login" className="btn btn-ghost">
+            Sign in
+          </Link>
+        )}
         <Link href="/list-your-land" className="btn btn-primary">
           Post land
         </Link>
       </div>
-    );
-  }
 
-  const [operator, admin] = await Promise.all([
-    isOperator(user.id),
-    isAdmin(user.id),
-  ]);
-
-  return (
-    <div className="hidden items-center gap-3 md:flex">
-      <Link href="/dashboard" className="btn btn-ghost">
-        Dashboard
-      </Link>
-      {admin ? (
-        <Link href="/admin" className="btn btn-ghost">
-          Admin
-        </Link>
-      ) : operator ? (
-        <Link href="/admin" className="btn btn-ghost">
-          Operator
-        </Link>
-      ) : null}
-      <Link href="/list-your-land" className="btn btn-primary">
-        Post land
-      </Link>
-    </div>
+      {/* Mobile */}
+      <div className="md:hidden">
+        <MobileNav
+          links={LINKS}
+          signedIn={Boolean(user)}
+          isAdmin={admin}
+          isOperator={operator}
+        />
+      </div>
+    </>
   );
 }

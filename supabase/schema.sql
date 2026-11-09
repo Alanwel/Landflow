@@ -884,3 +884,53 @@ update public.profiles p
    set email = u.email
   from auth.users u
  where u.id = p.id and p.email is null;
+
+-- ---------------------------------------------------------------------------
+-- Auto-confirm new accounts
+-- ---------------------------------------------------------------------------
+-- WHY
+--   Supabase's built-in email service sends at most a couple of messages an
+--   hour and silently drops the rest. With "Confirm email" switched on, a
+--   new account was created but the confirmation link never arrived, so the
+--   person could never finish signing up. The site looked broken.
+--
+--   Rather than wait on a mail provider, the DATABASE marks the address as
+--   confirmed the moment the row is created. GoTrue then issues a session
+--   straight away and never tries to send the mail.
+--
+-- WHAT THIS COSTS
+--   The email address is NOT verified. Someone could register with an address
+--   they do not own. For a marketplace whose real contact is a phone number
+--   that is an acceptable trade at this stage — but it is a trade, not a free
+--   win.
+--
+-- HOW TO PUT REAL VERIFICATION BACK
+--   1. configure SMTP in the Supabase dashboard (Authentication -> Providers
+--      -> Email -> SMTP), using a real provider such as Resend;
+--   2. turn "Confirm email" back ON there;
+--   3. drop this trigger:
+--        drop trigger if exists on_auth_user_created_confirm on auth.users;
+--        drop function if exists public.auto_confirm_signup();
+--   New accounts will then need to click the link in the email.
+-- ---------------------------------------------------------------------------
+create or replace function public.auto_confirm_signup()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  -- Only for accounts created through a signup: an admin-created account
+  -- has no confirmation_sent_at, and the CMS machine account is created
+  -- deliberately and confirmed separately.
+  if new.email_confirmed_at is null and new.confirmation_sent_at is not null then
+    new.email_confirmed_at = now();
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created_confirm on auth.users;
+create trigger on_auth_user_created_confirm
+  before insert on auth.users
+  for each row execute function public.auto_confirm_signup();
